@@ -5,21 +5,32 @@ library(dplyr)
 library(ggplot2)
 
 # Load the dataset
-gtd_data <- read.csv("global_terrorism.csv", 
+gtd_data <- read.csv("/Users/yashvikommidi/Downloads/global_terrorism.csv", 
                      stringsAsFactors = FALSE)
 
 # Basic data exploration
 glimpse(gtd_data)
 
-# Select relevant columns for analysis
-gtd_clean <- gtd_data %>%
-  select(eventid, iyear, country_txt, region_txt, attacktype1_txt) %>%
-  # Remove missing or invalid years
-  filter(!is.na(iyear) & iyear > 0) %>%
-  # Optional: Filter for a specific year range (1970–2017)
-  filter(iyear >= 1970 & iyear <= 2017)
+colnames(gtd_data)
 
-# Inspect the cleaned data
-head(gtd_clean)             # First few rows
-summary(gtd_clean$iyear)    # Year range check
+# Data Wrangling
+
+TotalNumber_of_Attack <- gtd_data %>%
+  select(attacktype1, attacktype2, attacktype3, iyear) %>%
+  mutate(
+    attacktype1_clean = ifelse(!is.na(attacktype1), 1, 0),
+    attacktype2_clean = ifelse(!is.na(attacktype2), 1, 0),
+    attacktype3_clean = ifelse(!is.na(attacktype3), 1, 0)
+  )%>%
+  glimpse()
+
+
+# Data Analysis
+
+Total_Number_of_Attack<-TotalNumber_of_Attack %>%
+  group_by(iyear) %>%
+  summarise(
+    Total_attack = sum(attacktype1_clean + attacktype2_clean + attacktype3_clean)
+  )%>%
+  glimpse()
 
