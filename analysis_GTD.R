@@ -5,7 +5,7 @@ library(dplyr)
 library(ggplot2)
 
 # Load the dataset
-gtd_data <- read.csv("/Users/yashvikommidi/Downloads/global_terrorism.csv", 
+gtd_data <- read.csv("globalterrorismdb_0718dist.csv", 
                      stringsAsFactors = FALSE)
 
 # Basic data exploration
@@ -23,8 +23,6 @@ TotalNumber_of_Attack <- gtd_data %>%
     attacktype3_clean = ifelse(!is.na(attacktype3), 1, 0)
   )%>%
   glimpse()
-
-
 # Data Analysis
 
 Total_Number_of_Attack<-TotalNumber_of_Attack %>%
@@ -33,4 +31,20 @@ Total_Number_of_Attack<-TotalNumber_of_Attack %>%
     Total_attack = sum(attacktype1_clean + attacktype2_clean + attacktype3_clean)
   )%>%
   glimpse()
+
+
+
+# Visualizations with Bar plot
+ggplot(Total_Number_of_Attack, aes(x = factor(iyear), y = Total_attack)) +
+  geom_bar(stat = "identity",fill = "lightblue",width = 0.9) +
+  labs(
+    title = "Number of Attacks per Year",
+    x = "Year",
+    y = "Total number of Attack"
+  ) +
+  theme_minimal()
+
+
+
+
 
