@@ -28,6 +28,8 @@ TotalNumber_of_Attack <- gtd_data %>%
   glimpse()
 
 # Data Analysis
+#This code groups the data by year (iyear) and calculates the total number of attacks each year by summing all recorded attack types. 
+#Finally, glimpse() is used to display a quick overview of the summarized results.
 
 Total_Number_of_Attack<-TotalNumber_of_Attack %>%
   group_by(iyear) %>%
