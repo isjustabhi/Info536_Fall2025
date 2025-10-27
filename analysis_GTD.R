@@ -15,6 +15,7 @@ colnames(gtd_data)
 
 # Data Wrangling
 
+
 TotalNumber_of_Attack <- gtd_data %>%
   select(attacktype1, attacktype2, attacktype3, iyear) %>%
   mutate(
