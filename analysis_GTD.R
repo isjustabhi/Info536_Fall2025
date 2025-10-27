@@ -41,6 +41,10 @@ Total_Number_of_Attack<-TotalNumber_of_Attack %>%
 
 
 # Visualizations with Bar plot
+#This code creates a bar plot showing the total number of attacks per year. 
+#Each bar represents a year on the x-axis and the total number of attacks on the y-axis.
+#The plot uses light blue bars, clear labels, and a minimal theme for a clean and simple visualization.
+
 ggplot(Total_Number_of_Attack, aes(x = factor(iyear), y = Total_attack)) +
   geom_bar(stat = "identity",fill = "lightblue",width = 0.9) +
   labs(
