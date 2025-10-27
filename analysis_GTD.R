@@ -14,7 +14,9 @@ glimpse(gtd_data)
 colnames(gtd_data)
 
 # Data Wrangling
-
+#This code selects attack type and year columns from the dataset, 
+#then creates new binary columns indicating whether each attack type is present (1) or missing (0).
+#Finally, it uses glimpse() to quickly view the cleaned data structure.
 
 TotalNumber_of_Attack <- gtd_data %>%
   select(attacktype1, attacktype2, attacktype3, iyear) %>%
@@ -24,6 +26,7 @@ TotalNumber_of_Attack <- gtd_data %>%
     attacktype3_clean = ifelse(!is.na(attacktype3), 1, 0)
   )%>%
   glimpse()
+
 # Data Analysis
 
 Total_Number_of_Attack<-TotalNumber_of_Attack %>%
